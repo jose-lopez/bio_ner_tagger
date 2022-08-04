@@ -1,0 +1,18 @@
+{"label":"PERSON","pattern":[{"LOWER":"georg"}]}
+{"label":"PERSON","pattern":[{"LOWER":"shairi"}]}
+{"label":"PERSON","pattern":[{"LOWER":"shirleni"}]}
+{"label":"PERSON","pattern":[{"LOWER":"hippocrates"}]}
+{"label":"GOD","pattern":[{"LOWER":"poseidon"}]}
+{"label":"GOD","pattern":[{"LOWER":"odin"}]}
+{"label":"GOD","pattern":[{"LOWER":"asclepius"}]}
+{"label":"GOD","pattern":[{"LOWER":"thoth"}]}
+{"label":"GOD","pattern":[{"LOWER":"horus"}]}
+{"label":"GOD","pattern":[{"LOWER":"zeus"}]}
+{"pattern": [{"TEXT": "waiter"}], "label": "WORK"}
+{"pattern": [{"TEXT": "waitress"}], "label": "WORK"}
+{"pattern": [{"TEXT": "engineer"}], "label": "WORK"}
+{"pattern": [{"TEXT": "physician"}], "label": "WORK"}  
+{"pattern": [{"TEXT": "Olimpics"}], "label": "GROUP"}
+{"pattern": [{"TEXT": "Titans"}], "label": "GROUP"}
+{"pattern": [{"TEXT": "Egypt"}], "label": "COUNTRY"}
+{"pattern": [{"TEXT": "Greece"}], "label": "COUNTRY"}
