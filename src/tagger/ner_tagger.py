@@ -183,6 +183,9 @@ if __name__ == '__main__':
         train_docs = docs[:training_samples]
         dev_docs = docs[training_samples:]
 
+        print(
+            f'Saving the training and evaluation sentences at ./train.spacy and ./dev.spacy')
+
         train_docbin = DocBin(docs=train_docs)
         train_docbin.to_disk("./train.spacy")
 
