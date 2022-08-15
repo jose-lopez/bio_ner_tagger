@@ -11,7 +11,7 @@ import math
 import random
 import sys
 
-from spacy.matcher import Matcher
+from spacy.matcher import Matcher, PhraseMatcher
 from spacy.tokens import Span, DocBin
 import spacy
 
@@ -43,6 +43,23 @@ def setting_patterns(patterns, matcher):
             print("There is an error on label value at line: {}".format(
                 current_line))
             sys.exit()
+
+
+def setting_patterns_bio_objects(matcher, nlp):
+
+    path_bio_objects = "data/bio_objects"
+
+    bio_files = [str(x) for x in Path(path_bio_objects).glob("**/*")]
+
+    for file in bio_files:
+        with open(file, 'r', encoding="utf8") as f:
+            bio_objects = [line.strip() for line in list(f.readlines())]
+
+        for bio_object in bio_objects:
+            synonyms = bio_object.split(";")
+            CATEGORY = synonyms[0].upper()
+            patterns = [doc for doc in nlp.pipe(synonyms)]
+            matcher.add(CATEGORY, patterns)
 
 
 def token_from_span_in(spans, current_span):
@@ -88,10 +105,11 @@ def tagging_file_sentences(sentences, matcher, nlp):
 
         doc.ents = spans
 
-        if doc.ents:
-            entities_docs.append(doc)
-        else:
-            no_entities_docs.append(doc)
+        if doc.text:
+            if doc.ents:
+                entities_docs.append(doc)
+            else:
+                no_entities_docs.append(doc)
 
     return entities_docs, no_entities_docs
 
@@ -122,7 +140,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 4:
         args = sys.argv[1:]
         MODEL = args[0].split("=")[1]
-        PATTERNS_PATH = args[1].split("=")[1]
+        #PATTERNS_PATH = args[1].split("=")[1]
         CORPUS_PATH = args[2].split("=")[1]
     else:
         print("Please check the arguments at the command line")
@@ -134,10 +152,12 @@ if __name__ == '__main__':
     nlp = spacy.load(MODEL)
     print(".. done" + "\n")
 
-    print(f'Loading the patterns ({PATTERNS_PATH})....')
-    matcher = Matcher(nlp.vocab)
-    patterns = load_jsonl(PATTERNS_PATH)
-    setting_patterns(patterns, matcher)
+    print(f'Setting the patterns for the processing of ({CORPUS_PATH})....')
+    # matcher = Matcher(nlp.vocab)
+    matcher = PhraseMatcher(nlp.vocab)
+    # patterns = load_jsonl(PATTERNS_PATH)
+    # setting_patterns(patterns, matcher)
+    setting_patterns_bio_objects(matcher, nlp)
     print(".. done" + "\n")
 
     print(f'Processing the corpus ({CORPUS_PATH})....')

@@ -1,0 +1,19 @@
+AML1-ETO represses transcription of RUNX1 target genes by competitively displacing RUNX1 and recruiting corepressors such as histone deacetylase 3 (HDAC3).
+
+The decreased expression of AML1-ETO chimeric gene was associated with increased expression of LAT1 and RUNX3 genes targets of AML1.
+
+AML1/RUNX1 is a frequent target of chromosome translocations and mutations in myeloid and B-cell leukemias, and upregulation of AML1 is also observed in some cases of T-cell leukemias and lymphomas.
+
+Here, we show that SOX7 inhibits the expression of RUNX1 target genes in HE, while having no effect on RUNX1 expression itself.
+
+Treatment with these inhibitors reduces binding of RUNX1 to target genes, alters the expression of RUNX1 target genes, and impacts cell survival and differentiation.
+
+We further demonstrated that helicase-like transcription factor was a RUNX1 target and transcriptionally repressed by RUNX1-ETO and site-specific DNA methylation through a duplicated RUNX1 binding site in its promoter.
+
+Direct interaction of HIRA and RUNX1 activates the downstream targets of RUNX1 implicated in generation of hematopoietic stem cells.
+
+RUNX1 was identified as a target of miR-302b and their interaction was confirmed by luciferase activity assays, RUNX1 silencing and overexpression of a RUNX1 mutant construct lacking the 3 \ UTR.
+
+RUNX1 was identified as a direct target of miR-302b, and knockdown of RUNX1 inhibited cell growth in a manner similar to miR-302b overexpression, whereas introduction of a 3 \ UTR mutant of RUNX1 reversed the suppressive effect of miR-302b.
+
+Finally, we discuss how aberrant PTMs of RUNX1 might contribute to tumorigenesis and also strategies to develop anticancer therapies targeting RUNX1 PTMs.
