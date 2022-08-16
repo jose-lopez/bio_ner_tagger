@@ -45,6 +45,9 @@ if __name__ == '__main__':
         sys.exit()
 
     nlp = spacy.load(MODEL)
+    
+    print("The pipelines's components:")
+    print(nlp.pipe_names)
 
     corpus_size, files = from_corpus(CORPUS_PATH)
     # Finding a verb with a subject and a dobj from below
@@ -58,8 +61,6 @@ if __name__ == '__main__':
 
             file_name = file_path.split("/")[2]
 
-            print(f'processing {file_name}')
-
             with open(file_path, 'r', encoding="utf8") as fl:
                 SENTENCES = [line.strip() for line in fl.readlines()]
 
@@ -72,9 +73,7 @@ if __name__ == '__main__':
 
                                     if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_:
 
-                                        print(doc.text)   
+                                        print(doc.text)
                                         print(
                                             f'event("{np_nsubj.root.text}",{np_nsubj.root.head.lemma_},"{np_dobj.root.text}")')
-                                        print(
-                                            f'"nominal subject": {np_nsubj.text}, "direct object": {np_dobj.text}')
                                         

@@ -13,6 +13,7 @@ import sys
 
 from spacy.matcher import Matcher, PhraseMatcher
 from spacy.tokens import Span, DocBin
+from spacy.language import Language
 import spacy
 
 
@@ -27,6 +28,45 @@ def load_jsonl(path):
 
     return data
 
+def create_config(model_name:str, nlp: Language, component_to_update: str, output_path: Path):
+    
+    # nlp = spacy.load(model_name)
+
+    # create a new config as a copy of the loaded pipeline's config
+    config = nlp.config.copy()
+
+    # revert most training settings to the current defaults
+    default_config = spacy.blank(nlp.lang).config
+    config["corpora"] = default_config["corpora"]
+    config["training"]["logger"] = default_config["training"]["logger"]
+
+    # copy tokenizer and vocab settings from the base model, which includes
+    # lookups (lexeme_norm) and vectors, so they don't need to be copied or
+    # initialized separately
+    config["initialize"]["before_init"] = {
+        "@callbacks": "spacy.copy_from_base_model.v1",
+        "tokenizer": model_name,
+        "vocab": model_name,
+    }
+    config["initialize"]["lookups"] = None
+    config["initialize"]["vectors"] = None
+
+    # source all components from the loaded pipeline and freeze all except the
+    # component to update; replace the listener for the component that is
+    # being updated so that it can be updated independently
+    config["training"]["frozen_components"] = []
+    for pipe_name in nlp.component_names:
+        if pipe_name != component_to_update:
+            config["components"][pipe_name] = {"source": model_name}
+            config["training"]["frozen_components"].append(pipe_name)
+        else:
+            config["components"][pipe_name] = {
+                "source": model_name,
+                "replace_listeners": ["model.tok2vec"],
+            }
+
+    # save the config
+    config.to_disk(output_path)
 
 def setting_patterns(patterns, matcher):
 
@@ -136,12 +176,17 @@ def from_corpus(CORPUS_PATH):
 
 
 if __name__ == '__main__':
+    
+    # The arguments for this script must be typed (for instance) as follows:
+    # --model=en_core_web_sm --corpus=data/corpus_sars_cov --component_to_update=ner --config_output_path=./config_ner.cfg
+    # --model=en_core_web_sm --corpus=data/corpus_covid --component_to_update=ner --config_output_path=./config_ner.cfg
 
-    if len(sys.argv) == 4:
+    if len(sys.argv) == 5:
         args = sys.argv[1:]
         MODEL = args[0].split("=")[1]
-        #PATTERNS_PATH = args[1].split("=")[1]
-        CORPUS_PATH = args[2].split("=")[1]
+        CORPUS_PATH = args[1].split("=")[1]
+        COMPONENT_TO_UPDATE = args[2].split("=")[1]
+        CONFIG_OUTPUT_PATH = args[3].split("=")[1]
     else:
         print("Please check the arguments at the command line")
         sys.exit()
@@ -150,6 +195,8 @@ if __name__ == '__main__':
 
     print(f'Loading the model ({MODEL})....')
     nlp = spacy.load(MODEL)
+    print("\t" + "The pipeline's components:")
+    print("\t" + nlp.pipe_names)
     print(".. done" + "\n")
 
     print(f'Setting the patterns for the processing of ({CORPUS_PATH})....')
@@ -160,7 +207,7 @@ if __name__ == '__main__':
     setting_patterns_bio_objects(matcher, nlp)
     print(".. done" + "\n")
 
-    print(f'Processing the corpus ({CORPUS_PATH})....')
+    print(f'Processing NER entities for the corpus ({CORPUS_PATH})....')
 
     # Total of sentences in the corpus and the its list of files
     corpus_size, files = from_corpus(CORPUS_PATH)
@@ -217,4 +264,14 @@ if __name__ == '__main__':
         print("No files to tag. Please check the contents in the data/corpus folder" + "\n")
         sys.exit()
 
-    print("\n" + ">>>>>>> Entities tagging finished...........")
+    print("\n" + ">>>>>>> Entities tagging finished..........." + "\n" + "\n")
+
+    print(f'Creating the configuration file for training at ./config_ner.cfg')
+
+    create_config(MODEL, nlp, COMPONENT_TO_UPDATE, Path(CONFIG_OUTPUT_PATH))
+
+    print(".... done"+ "\n")
+
+    print(f'To fine tune your model run the following command:')
+    print(f'python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.spacy --paths.dev ./dev.spacy')
+
