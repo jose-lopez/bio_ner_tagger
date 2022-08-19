@@ -30,8 +30,6 @@ def load_jsonl(path):
 
 def create_config(model_name:str, nlp: Language, component_to_update: str, output_path: Path):
     
-    # nlp = spacy.load(model_name)
-
     # create a new config as a copy of the loaded pipeline's config
     config = nlp.config.copy()
 
@@ -84,7 +82,6 @@ def setting_patterns(patterns, matcher):
                 current_line))
             sys.exit()
 
-
 def setting_patterns_bio_objects(matcher, nlp):
 
     path_bio_objects = "data/bio_objects"
@@ -100,7 +97,6 @@ def setting_patterns_bio_objects(matcher, nlp):
             CATEGORY = synonyms[0].upper()
             patterns = [doc for doc in nlp.pipe(synonyms)]
             matcher.add(CATEGORY, patterns)
-
 
 def token_from_span_in(spans, current_span):
 
@@ -152,7 +148,6 @@ def tagging_file_sentences(sentences, matcher, nlp):
                 no_entities_docs.append(doc)
 
     return entities_docs, no_entities_docs
-
 
 def from_corpus(CORPUS_PATH):
 
