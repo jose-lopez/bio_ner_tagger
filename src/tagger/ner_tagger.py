@@ -82,21 +82,37 @@ def setting_patterns(patterns, matcher):
                 current_line))
             sys.exit()
 
+
 def setting_patterns_bio_objects(matcher, nlp):
 
     path_bio_objects = "data/bio_objects"
 
+    categories = []
+
     bio_files = [str(x) for x in Path(path_bio_objects).glob("**/*")]
 
+    line = 1
+
     for file in bio_files:
+
+        line = 1
+
         with open(file, 'r', encoding="utf8") as f:
             bio_objects = [line.strip() for line in list(f.readlines())]
 
-        for bio_object in bio_objects:
-            synonyms = bio_object.split(";")
-            CATEGORY = synonyms[0].upper()
-            patterns = [doc for doc in nlp.pipe(synonyms)]
-            matcher.add(CATEGORY, patterns)
+            for bio_object in bio_objects:
+                synonyms = bio_object.split(";")
+                CATEGORY = synonyms[0].upper()
+                patterns = [doc for doc in nlp.pipe(synonyms)]
+                if CATEGORY not in categories:
+                    categories.append(CATEGORY)
+                    matcher.add(CATEGORY, patterns)
+                    line += 1
+                else:
+                    print(f'The category {CATEGORY} in the file {file} at line {line} is repeated')
+                    sys.exit()
+
+        return categories
 
 def token_from_span_in(spans, current_span):
 
@@ -190,8 +206,9 @@ if __name__ == '__main__':
 
     print(f'Loading the model ({MODEL})....')
     nlp = spacy.load(MODEL)
+    
     print("\t" + "The pipeline's components:")
-    print("\t" + nlp.pipe_names)
+    print(f'\t{nlp.pipe_names}')
     print(".. done" + "\n")
 
     print(f'Setting the patterns for the processing of ({CORPUS_PATH})....')

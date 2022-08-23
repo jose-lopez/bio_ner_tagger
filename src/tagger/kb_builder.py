@@ -57,21 +57,49 @@ def get_regulatory_functions(relations_file_):
 
     for line in LINES:
         if "------------" not in line:
-            relations.add(line.strip())
+            relations.append(line)
 
     return relations
 
 
 def in_relations(relation_, relations_):
 
-    in_relation = False
+    in_relation = ""
 
     for r in relations_:
         if relation_ in r:
-            in_relation = True
+            in_relation = relation_
             break
 
     return in_relation
+
+
+def getting_bio_objects_categories():
+
+    path_bio_objects = "data/bio_objects"
+
+    categories = []
+
+    bio_files = [str(x) for x in Path(path_bio_objects).glob("**/*")]
+
+    for file in bio_files:
+
+        line = 1
+
+        with open(file, 'r', encoding="utf8") as f:
+            bio_objects = [line.strip() for line in list(f.readlines())]
+
+            for bio_object in bio_objects:
+                synonyms = bio_object.split(";")
+                CATEGORY = synonyms[0].upper()
+                if CATEGORY not in categories:
+                    categories.append(CATEGORY)
+                    line += 1
+                else:
+                    print(f'The category {CATEGORY} in the file {file} at line {line} is repeated')
+                    sys.exit()
+
+    return categories
 
 
 if __name__ == '__main__':
@@ -94,11 +122,15 @@ if __name__ == '__main__':
         print("Please check the arguments at the command line")
         sys.exit()
 
+    print("\n" + ">>>>>>> Starting the knowledge base modeling..........." + "\n")
+
     # Loading the model
+    print(f'Loading the model ({MODEL})....')
     nlp = spacy.load(MODEL)
 
-    print("The pipeline's components:")
-    print(nlp.pipe_names)
+    print("\t" + "The pipeline's components are:")
+    print(f'\t{nlp.pipe_names}')
+    print(".. done" + "\n")
 
     # Getting the corpus amount of sentences and the path to each related file
     corpus_size, files = from_corpus(CORPUS_PATH)
@@ -106,7 +138,10 @@ if __name__ == '__main__':
     # Getting the relations to check when an event is on validation
     relations = get_regulatory_functions(relations_file)
 
-    print(f'Processing regulation events for the corpus ({CORPUS_PATH})....')
+    # Getting the categories of biological objects
+    categories = getting_bio_objects_categories()
+
+    print(f'Processing regulation events from the corpus at ({CORPUS_PATH})....')
 
     FILE_ON_PROCESS = 1
 
@@ -130,53 +165,57 @@ if __name__ == '__main__':
                         if np_nsubj.root.dep == nsubj and np_nsubj.root.head.pos == VERB:
                             for np_dobj in doc.noun_chunks:
                                 if np_dobj.root.dep == dobj and np_nsubj.root.head.pos == np_dobj.root.head.pos:
-                                    # The lemma and the token must be the same (so nsubj and the dobj are really connected)
-                                    if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_ and np_nsubj.root.i == np_dobj.root.i:
+                                    # The lemma and the head's token index must be the same for nsubj and the dobj, so they are really connected)
+                                    if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_ and np_nsubj.root.head.i == np_dobj.root.head.i:
 
                                         SUBJ = get_label(np_nsubj.root, doc.ents)
                                         OBJ = get_label(np_dobj.root, doc.ents)
                                         relation = in_relations(np_nsubj.root.head.lemma_, relations)
 
-                                        print(doc.text)
+                                        # print(doc.text)
 
-                                        if SUBJ and OBJ and relation:
+                                        if SUBJ in categories and OBJ in categories and relation:
 
-                                            event = "event(" + SUBJ + "," + relation + "," + OBJ + ")"
+                                            # event = "event(" + SUBJ + "," + relation + "," + OBJ + ")"
 
-                                            if event in events_sents.keys:
+                                            event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
+
+                                            if event in events_sents.keys():
                                                 if doc.text not in events_sents[event]:
                                                     events_sents[event].add(doc.text)
-                                                    print(f'event("{SUBJ}",{relation},"{OBJ}")')
                                             else:
                                                 events_sents[event] = [doc.text]
-                                                print(f'event("{SUBJ}",{relation},"{OBJ}")')
+                                                print(event)
+                                                
 
             FILE_ON_PROCESS += 1
 
         print(f'Printing the knowledge base of regulation events at: {path_to_kb}' + "\n")
 
-        with open(path_to_kb, 'w', encoding="utf8") as fd:
+        if events_sents.keys():
 
-            fd.write("kbase([" + "\n")
+            with open(path_to_kb, 'w', encoding="utf8") as fd:
 
-            events = events_sents.keys()
+                fd.write("base([" + "\n")
 
-            for event in events[:-1]:
-                fd.write(event + "," + "\n")
-            else:
-                fd.write(events[-1] + "\n" + "]).")
+                events = list(events_sents.keys())
 
-        print(f'Printing the documented knowledge base of regulation events at: {path_to_kb_doc}' + "\n")
-
-        with open(path_to_kb_doc, 'w', encoding="utf8") as fd:
-
-            for event, sentences in events_sents.items:
-
-                fd.write(event + "\n")
-
-                for sentence in sentences[:-1]:
-                    fd.write(sentence + "\n")
+                for event_ in events[:-1]:
+                    fd.write(event_ + "," + "\n")
                 else:
-                    fd.write(sentences[-1])
+                    fd.write(events[-1] + "\n" + "]).")
+
+            print(f'Printing the documented knowledge base of regulation events at: {path_to_kb_doc}' + "\n")
+
+            with open(path_to_kb_doc, 'w', encoding="utf8") as fd:
+
+                for event, sentences in events_sents.items():
+
+                    fd.write(event + "." + "\n")
+
+                    for sentence in sentences[:-1]:
+                        fd.write(sentence + "\n")
+                    else:
+                        fd.write(sentences[-1] + "\n")
 
         print(f'Knowledge base processing done !!!....')
