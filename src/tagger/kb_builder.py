@@ -104,6 +104,9 @@ def getting_bio_objects_categories():
 
 if __name__ == '__main__':
 
+    # The arguments to pass on to build the knowledge base using the trained model
+    # --model=model/model-best --corpus=data/corpus_covid
+
     # Paths to the knowledge base (in prolog format and documented)
     path_to_kb = "data/knowledge_base/kBase.pl"
     path_to_kb_doc = "data/knowledge_base/kBase.txt"
@@ -186,7 +189,6 @@ if __name__ == '__main__':
                                             else:
                                                 events_sents[event] = [doc.text]
                                                 print(event)
-                                                
 
             FILE_ON_PROCESS += 1
 
