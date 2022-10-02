@@ -7,7 +7,7 @@ Created on 8 ago. 2022
 from spacy.symbols import nsubj, VERB, dobj
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("model/model-best")
 doc = nlp("HIV-1 preferentially infects CCR5 with high levels of CD4 and those subsets of T cells, HIV-1 express CCR5, particularly memory T cells.")
 
 # Finding a verb with a subject and a dobj from below

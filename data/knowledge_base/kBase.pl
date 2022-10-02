@@ -1,12 +1,13 @@
 base([
+event('CD4',express,'CD4'),
 event('ACE2',bind,'SARS-COV'),
+event('ACE2',convert,'ACE2'),
 event('CD4',promote,'CCR5'),
 event('CD4',stimulate,'CD4'),
 event('ACE2',bind,'SARS-COV-2'),
+event('CD4',express,'CCR5'),
 event('GLYCOPROTEIN',bind,'ACE2'),
 event('SARS-COV',bind,'ACE2'),
 event('SARS-COV-2',bind,'ACE2'),
-event('SARS-COV',recognize,'ACE2'),
-event('CD4',express,'CCR5'),
-event('CD4',express,'CD4')
+event('SARS-COV',recognize,'ACE2')
 ]).

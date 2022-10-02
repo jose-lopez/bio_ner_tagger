@@ -28,6 +28,45 @@ def load_jsonl(path):
 
     return data
 
+
+def create_config_2(model_name: str, nlp: Language, components_to_update: list, output_path: Path):
+
+    # create a new config as a copy of the loaded pipeline's config
+    config = nlp.config.copy()
+
+    # revert most training settings to the current defaults
+    default_config = spacy.blank(nlp.lang).config
+    config["corpora"] = default_config["corpora"]
+    config["training"]["logger"] = default_config["training"]["logger"]
+
+    # copy tokenizer and vocab settings from the base model, which includes
+    # lookups (lexeme_norm) and vectors, so they don't need to be copied or
+    # initialized separately
+    config["initialize"]["before_init"] = {
+        "@callbacks": "spacy.copy_from_base_model.v1",
+        "tokenizer": model_name,
+        "vocab": model_name,
+    }
+    config["initialize"]["lookups"] = None
+    config["initialize"]["vectors"] = None
+
+    # source all components from the loaded pipeline and freeze all except the
+    # component to update; replace the listener for the component that is
+    # being updated so that it can be updated independently
+    config["training"]["frozen_components"] = []
+    for pipe_name in nlp.component_names:
+        if pipe_name not in components_to_update:
+            config["components"][pipe_name] = {"source": model_name}
+            config["training"]["frozen_components"].append(pipe_name)
+        else:
+            config["components"][pipe_name] = {
+                "source": model_name,
+                "replace_listeners": ["model.tok2vec"],
+            }
+
+    # save the config
+    config.to_disk(output_path)
+
 def create_config(model_name:str, nlp: Language, component_to_update: str, output_path: Path):
     
     # create a new config as a copy of the loaded pipeline's config
@@ -109,10 +148,10 @@ def setting_patterns_bio_objects(matcher, nlp):
                     matcher.add(CATEGORY, patterns)
                     line += 1
                 else:
-                    print(f'The category {CATEGORY} in the file {file} at line {line} is repeated')
+                    print(f'The category {CATEGORY} in the file {file} at line {line} is repeated, please check.')
                     sys.exit()
 
-        return categories
+    return categories
 
 def token_from_span_in(spans, current_span):
 
@@ -138,6 +177,9 @@ def tagging_file_sentences(sentences, matcher, nlp):
 
     no_entities_docs = []
     entities_docs = []
+    
+    propn_hash = nlp.vocab.strings["PROPN"]
+    nnp_hash = nlp.vocab.strings["NNP"]
 
     for doc in nlp.pipe(sentences):
 
@@ -146,6 +188,19 @@ def tagging_file_sentences(sentences, matcher, nlp):
         spans = []
 
         for match_id, start, end in matches:
+
+            # A first attempt to add POS and TAG labels to those entities
+            # whose names are a single word token (JAK3, CDR4, and so on)
+            # We need to define multiword tokens to improve the POS and TAG labeling
+            # so multiword entities' names and tokens be available here.
+
+            if start == end - 1:
+                doc[start].pos = propn_hash
+                doc[start].tag = nnp_hash
+                doc[start].pos_ = "PROPN"
+                doc[start].tag_ = "NNP"
+
+            # Below the code to tag the entities in the document on process..
 
             label_ = nlp.vocab.strings[match_id]
 
@@ -189,14 +244,14 @@ def from_corpus(CORPUS_PATH):
 if __name__ == '__main__':
     
     # The arguments for this script must be typed (for instance) as follows:
-    # --model=en_core_web_sm --corpus=data/corpus_sars_cov --component_to_update=ner --config_output_path=./config_ner.cfg
-    # --model=en_core_web_sm --corpus=data/corpus_covid --component_to_update=ner --config_output_path=./config_ner.cfg
+    # --model=en_core_web_sm --corpus=data/corpus_sars_cov --components_to_update=ner,tagger --config_output_path=./config_ner.cfg
+    # --model=en_core_web_sm --corpus=data/corpus_covid --components_to_update=ner,tagger --config_output_path=./config_ner.cfg
 
     if len(sys.argv) == 5:
         args = sys.argv[1:]
         MODEL = args[0].split("=")[1]
         CORPUS_PATH = args[1].split("=")[1]
-        COMPONENT_TO_UPDATE = args[2].split("=")[1]
+        COMPONENTS_TO_UPDATE = list(args[2].split("=")[1].split(","))
         CONFIG_OUTPUT_PATH = args[3].split("=")[1]
     else:
         print("Please check the arguments at the command line")
@@ -206,7 +261,7 @@ if __name__ == '__main__':
 
     print(f'Loading the model ({MODEL})....')
     nlp = spacy.load(MODEL)
-    
+
     print("\t" + "The pipeline's components:")
     print(f'\t{nlp.pipe_names}')
     print(".. done" + "\n")
@@ -216,10 +271,11 @@ if __name__ == '__main__':
     matcher = PhraseMatcher(nlp.vocab)
     # patterns = load_jsonl(PATTERNS_PATH)
     # setting_patterns(patterns, matcher)
-    setting_patterns_bio_objects(matcher, nlp)
+    categories = setting_patterns_bio_objects(matcher, nlp)
+    print(categories)
     print(".. done" + "\n")
 
-    print(f'Processing NER entities for the corpus ({CORPUS_PATH})....')
+    print(f'Processing NER entities for the corpus at ({CORPUS_PATH})....')
 
     # Total of sentences in the corpus and the its list of files
     corpus_size, files = from_corpus(CORPUS_PATH)
@@ -257,7 +313,7 @@ if __name__ == '__main__':
 
         random.shuffle(docs)
 
-        training_samples = math.floor(len(docs) * 0.7)
+        training_samples = math.floor(len(docs) * 0.95)
 
         train_docs = docs[:training_samples]
         dev_docs = docs[training_samples:]
@@ -280,10 +336,10 @@ if __name__ == '__main__':
 
     print(f'Creating the configuration file for training at ./config_ner.cfg')
 
-    create_config(MODEL, nlp, COMPONENT_TO_UPDATE, Path(CONFIG_OUTPUT_PATH))
+    create_config_2(MODEL, nlp, COMPONENTS_TO_UPDATE, Path(CONFIG_OUTPUT_PATH))
 
     print(".... done"+ "\n")
 
-    print(f'To fine tune your model run the following command:')
+    print(f'For the fine tuning of your model, run the following command:')
     print(f'python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.spacy --paths.dev ./dev.spacy')
 

@@ -1,3 +1,5 @@
+CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
+
 On the contrary, HLA-Bw4-80 T was reduced in both HLA-B,51(-) BD patient cohorts.
 
 The restricted peptide binding of certain HLA-C alleles provides one explanation for the reduced expression of HLA-C molecules at the cell surface.

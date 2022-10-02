@@ -96,25 +96,137 @@ def getting_bio_objects_categories():
                     categories.append(CATEGORY)
                     line += 1
                 else:
-                    print(f'The category {CATEGORY} in the file {file} at line {line} is repeated')
+                    print(f'The category {CATEGORY} in file {file} at line {line} is repeated')
                     sys.exit()
 
     return categories
+
+
+def get_events_sents_noun_phrases(files, nlp, categories):
+
+    # The regulation events and their related sentences
+    events_sents = {}
+
+    FILE_ON_PROCESS = 1
+
+    if not len(files) == 0:
+
+        for file_path in files:
+
+            file_name = file_path.split("/")[2]
+
+            print(
+                f'..getting regulation events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}')
+
+            with open(file_path, 'r', encoding="utf8") as fl:
+                SENTENCES = [line.strip() for line in fl.readlines()]
+
+                for doc in nlp.pipe(SENTENCES):
+                    """
+                    for entity in doc.ents:
+                        if entity.start == entity.end - 1:
+                            print(f'{doc[entity.start].text}  {doc[entity.start].pos_}  {doc[entity.start].tag_}  {doc[entity.start].dep_}')
+                    """
+                    # Finding a verb with a subject and a dobj from below (all the possible ones)
+
+                    for np_nsubj in doc.noun_chunks:
+                        if (np_nsubj.root.dep_ == "nsubj" or np_nsubj.root.dep_ == "nsubjpass") and np_nsubj.root.head.pos == VERB:
+                            for np_dobj in doc.noun_chunks:
+                                if (np_dobj.root.dep_ == "dobj" or np_dobj.root.dep_ == "pobj") and np_nsubj.root.head.pos == np_dobj.root.head.pos:
+                                    # The lemma and the head's token index must be the same for nsubj and the dobj, so they are really connected)
+                                    if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_ and np_nsubj.root.head.i == np_dobj.root.head.i:
+
+                                        SUBJ = get_label(np_nsubj.root, doc.ents)
+                                        OBJ = get_label(np_dobj.root, doc.ents)
+                                        relation = in_relations(np_nsubj.root.head.lemma_, relations)
+
+                                        if SUBJ in categories and OBJ in categories and relation:
+
+                                            event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
+                                            # print(event)
+
+                                            if event in events_sents.keys():
+                                                if doc.text not in events_sents[event]:
+                                                    events_sents[event].append(doc.text)
+                                            else:
+                                                events_sents[event] = [doc.text]
+                                                print(event)
+
+            FILE_ON_PROCESS += 1
+
+    return events_sents
+
+
+def get_events_sents(files, nlp, categories):
+
+    # The regulation events and their related sentences
+    events_sents = {}
+
+    FILE_ON_PROCESS = 1
+
+    if not len(files) == 0:
+
+        for file_path in files:
+
+            file_name = file_path.split("/")[2]
+
+            print(
+                f'..getting regulation events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}')
+
+            with open(file_path, 'r', encoding="utf8") as fl:
+                SENTENCES = [line.strip() for line in fl.readlines()]
+
+                for doc in nlp.pipe(SENTENCES):
+
+                    nsubjs = []
+                    dobjs = []
+
+                    for entity in doc.ents:
+                        if entity.start == entity.end - 1: # Only entities with only one token (by now).
+                            #print(f'{doc[entity.start].text}  {doc[entity.start].pos_}  {doc[entity.start].tag_}  {doc[entity.start].dep_}  {doc[entity.start].head.text}  {doc[entity.start].head.pos_} {spacy.explain(doc[entity.start].head.pos_)}')
+                            if doc[entity.start].dep_ == "nsubj" or doc[entity.start].dep_ == "nsubjpass":
+                                nsubjs.append(doc[entity.start].i)
+                            elif doc[entity.start].dep_ == "dobj" or doc[entity.start].dep_ == "pobj":
+                                dobjs.append(doc[entity.start].i)
+
+                    # Finding a VERB token connecting the nsubjs and dobjs (all the possible ones)
+
+                    for nsubj in nsubjs:
+                        for dobj in dobjs:
+                            if doc[nsubj].head == doc[dobj].head and doc[nsubj].head.pos == VERB:
+
+                                SUBJ = get_label(doc[nsubj], doc.ents)
+                                OBJ = get_label(doc[dobj], doc.ents)
+                                relation = in_relations(doc[nsubj].head.lemma_, relations)
+
+                                if SUBJ in categories and OBJ in categories and relation:
+
+                                    event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
+                                    # print(event)
+
+                                    if event in events_sents.keys():
+                                        if doc.text not in events_sents[event]:
+                                            events_sents[event].append(doc.text)
+                                    else:
+                                        events_sents[event] = [doc.text]
+                                        print(event)
+
+            FILE_ON_PROCESS += 1
+
+    return events_sents
 
 
 if __name__ == '__main__':
 
     # The arguments to pass on to build the knowledge base using the trained model
     # --model=model/model-best --corpus=data/corpus_covid
+    # --model=model/model-best --corpus=data/corpus_sars_cov
 
     # Paths to the knowledge base (in prolog format and documented)
     path_to_kb = "data/knowledge_base/kBase.pl"
     path_to_kb_doc = "data/knowledge_base/kBase.txt"
     # Path to the relations-functions file
     relations_file = "data/relations/relations-functions.txt"
-
-    # The regulation events and their related sentences
-    events_sents = {}
 
     # getting the arguments
     if len(sys.argv) == 3:
@@ -146,78 +258,35 @@ if __name__ == '__main__':
 
     print(f'Processing regulation events from the corpus at ({CORPUS_PATH})....')
 
-    FILE_ON_PROCESS = 1
+    events_sents = get_events_sents_noun_phrases(files, nlp, categories)  # Using the noun phrases option
+    # events_sents = get_events_sents(files, nlp, categories)  # Using the token.head option
 
-    if not len(files) == 0:
-
-        for file_path in files:
-
-            file_name = file_path.split("/")[2]
-
-            print(
-                f'..getting regulation events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}')
-
-            with open(file_path, 'r', encoding="utf8") as fl:
-                SENTENCES = [line.strip() for line in fl.readlines()]
-
-                for doc in nlp.pipe(SENTENCES):
-
-                    # Finding a verb with a subject and a dobj from below (all the possible ones)
-
-                    for np_nsubj in doc.noun_chunks:
-                        if np_nsubj.root.dep == nsubj and np_nsubj.root.head.pos == VERB:
-                            for np_dobj in doc.noun_chunks:
-                                if np_dobj.root.dep == dobj and np_nsubj.root.head.pos == np_dobj.root.head.pos:
-                                    # The lemma and the head's token index must be the same for nsubj and the dobj, so they are really connected)
-                                    if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_ and np_nsubj.root.head.i == np_dobj.root.head.i:
-
-                                        SUBJ = get_label(np_nsubj.root, doc.ents)
-                                        OBJ = get_label(np_dobj.root, doc.ents)
-                                        relation = in_relations(np_nsubj.root.head.lemma_, relations)
-
-                                        # print(doc.text)
-
-                                        if SUBJ in categories and OBJ in categories and relation:
-
-                                            # event = "event(" + SUBJ + "," + relation + "," + OBJ + ")"
-
-                                            event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
-
-                                            if event in events_sents.keys():
-                                                if doc.text not in events_sents[event]:
-                                                    events_sents[event].add(doc.text)
-                                            else:
-                                                events_sents[event] = [doc.text]
-                                                print(event)
-
-            FILE_ON_PROCESS += 1
+    if events_sents.keys():
 
         print(f'Printing the knowledge base of regulation events at: {path_to_kb}' + "\n")
 
-        if events_sents.keys():
+        with open(path_to_kb, 'w', encoding="utf8") as fd:
 
-            with open(path_to_kb, 'w', encoding="utf8") as fd:
+            fd.write("base([" + "\n")
 
-                fd.write("base([" + "\n")
+            events = list(events_sents.keys())
 
-                events = list(events_sents.keys())
+            for event_ in events[:-1]:
+                fd.write(event_ + "," + "\n")
+            else:
+                fd.write(events[-1] + "\n" + "]).")
 
-                for event_ in events[:-1]:
-                    fd.write(event_ + "," + "\n")
+        print(f'Printing the documented knowledge base of regulation events at: {path_to_kb_doc}' + "\n")
+
+        with open(path_to_kb_doc, 'w', encoding="utf8") as fd:
+
+            for event, sentences in events_sents.items():
+
+                fd.write(event + "." + "\n")
+
+                for sentence in sentences[:-1]:
+                    fd.write(sentence + "\n")
                 else:
-                    fd.write(events[-1] + "\n" + "]).")
+                    fd.write(sentences[-1] + "\n")
 
-            print(f'Printing the documented knowledge base of regulation events at: {path_to_kb_doc}' + "\n")
-
-            with open(path_to_kb_doc, 'w', encoding="utf8") as fd:
-
-                for event, sentences in events_sents.items():
-
-                    fd.write(event + "." + "\n")
-
-                    for sentence in sentences[:-1]:
-                        fd.write(sentence + "\n")
-                    else:
-                        fd.write(sentences[-1] + "\n")
-
-        print(f'Knowledge base processing done !!!....')
+    print(f'Knowledge base processing done !!!....')

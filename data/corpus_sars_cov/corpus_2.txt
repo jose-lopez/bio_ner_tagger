@@ -1,19 +1,10 @@
-CCR5 is a key CCR that is highly expressed on CD4(+) T cells.
-
+CD4 express the CCR5.
 In parallel, only minor changes in proportions of CD4(+) T cells expressing Th1 (CCR5(+), CXCR3(+)), Th2 (CRTh2(+), CCR4(+)) and Treg (CD25(+), CD127(-), Foxp3(+)) markers were detected.
-
 CCR5, one of its receptors, specifically expressed on Th1 cells among CD4(+) T cells, can be up-regulated by Th1 cytokines like interleukin2 (IL-2) and interferon-gamma (IFN-γ), and down-regulated by Th2 cytokines like IL-4.
-
 HIV-1 preferentially infects T cells with high levels of CD4 and those subsets of T cells that express CCR5, particularly memory T cells.
-
 Cord blood-derived CD4(+) T cells are largely naive and do not express CCR5, the mandatory coreceptor for transmitted HIV-1 R5 strains in infants.
-
 These results were consistent with immunophenotypic data, which revealed a significant correlation between the percentage of CD4(+) T cells expressing CCR5 in the mucosa and the susceptibility to infection, in terms of both the viral dose and the numbers of transmitted founder viruses.
-
 We generated CD4(+) T cell lines expressing varying levels of CCR5 on the cell surface to show that CCR5 expression levels correlate with bystander apoptosis induction.
-
 CCR5 was highly expressed on CD4 T cells in SF but not in PB or SM.
-
 Both short-term reactivated and proliferating Ad5-specific CD4 T cells express the HIV coreceptor CCR5 and the HIV gp120-binding integrin alpha4beta7.
-
 The percentage of CD4+ T cells expressing CCR5 and/or CXCR3 was increased in patients.
