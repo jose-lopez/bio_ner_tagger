@@ -67,8 +67,9 @@ def create_config_2(model_name: str, nlp: Language, components_to_update: list, 
     # save the config
     config.to_disk(output_path)
 
-def create_config(model_name:str, nlp: Language, component_to_update: str, output_path: Path):
-    
+
+def create_config(model_name: str, nlp: Language, component_to_update: str, output_path: Path):
+
     # create a new config as a copy of the loaded pipeline's config
     config = nlp.config.copy()
 

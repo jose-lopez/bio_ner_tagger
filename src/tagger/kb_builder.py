@@ -10,6 +10,7 @@ import spacy
 from pathlib import Path
 import sys
 
+# from tagger.ner_tagger import load_jsonl
 
 def from_corpus(CORPUS_PATH):
 
