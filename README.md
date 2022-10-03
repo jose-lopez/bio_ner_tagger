@@ -8,7 +8,8 @@ In order tu run the python scripts hosted in this repository, please follow the 
 1. Install spaCy as you can see in: https://spacy.io/usage#quickstart.
 Be sure of having Python 3.9 in your system. We recomend to use a virtual environment as the spacy's installation instructions describes.
 
-2. Set the PYTHONPATH variable in order to point to the sources of this project. For instance:
+2. Set the PYTHONPATH variable in order to point to the sources of this project.
+For instance:
 export PYTHONPATH=$PYTHONPATH:$HOME/bio_ner_tagger/src
 
 3. Change directory to the bio_ner_tagger folder.
