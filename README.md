@@ -28,7 +28,7 @@ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./dev.spac
 6. The step above sets a new fine-tunned model in the ./model folder. You can use that model to build the knowledge base, as you can se in the following line:
 python src/tagger/kb_constructor.py --model=model/model-best --corpus=data/corpus_sars_cov
 
-7. The output of the step above are two files: kbase.pl and kbase.text, avalilable in the data/knowledge base, folder.
+7. The output of the step above are two files: kbase.pl and kbase.text, avalilable in the data/knowledge_base, folder.
 
 
 
