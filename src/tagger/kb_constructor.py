@@ -5,8 +5,10 @@ Created on 2 oct. 2022
 '''
 
 import sys
+
 from tagger.builder import Builder
 from tagger.utilities import Utility
+
 
 if __name__ == '__main__':
 

@@ -28,7 +28,7 @@ class Trainner(object):
         self.__corpus_path = corpus_path  # The corpus of files to tag to build the NER examples
         self.__components = components  # The components to tune up (tagger, ner, parser, and so on)
         self.__config_path = config_path  # The path to save the configuration file for training
-        
+
         print(f'Loading the model ({model_name})....')
         self.__nlp = spacy.load(model_name)
 

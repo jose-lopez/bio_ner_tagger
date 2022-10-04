@@ -19,8 +19,8 @@ from tagger.utilities import Utility
 if __name__ == '__main__':
 
     # The arguments for this script must be typed (for instance) as follows:
-    # --model=en_core_web_sm --corpus=data/corpus_sars_cov --components_to_update=trainner,tagger --config_output_path=./config_ner.cfg
-    # --model=en_core_web_sm --corpus=data/corpus_covid --components_to_update=trainner,tagger --config_output_path=./config_ner.cfg
+    # --model=en_core_web_sm --corpus=data/corpus_sars_cov --components_to_update=ner,tagger --config_output_path=./config_ner.cfg
+    # --model=en_core_web_sm --corpus=data/corpus_covid --components_to_update=ner,tagger --config_output_path=./config_ner.cfg
 
     if len(sys.argv) == 5:
         args = sys.argv[1:]
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     # Getting the biological objects' categories and setting the phrasematcher's patterns
     categories = trainner.setting_patterns_bio_objects(phrase_matcher, trainner.nlp)
-    print(categories)
+    # print(categories)
     print(".. done" + "\n")
 
     print(f'Processing NER entities for the corpus at ({CORPUS_PATH})....')
