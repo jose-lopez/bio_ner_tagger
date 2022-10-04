@@ -24,7 +24,7 @@ $ python src/tagger/setter.py --model=en_core_web_sm --corpus=data/corpus_sars_c
 
 5. The steps above define the files train.spacy and dev.spacy, and the config_ner.cfg configuration file. In order to fine-tune a model, please run:
 
-$ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./dev.spacy --paths.dev ./dev.spacy
+$ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.spacy --paths.dev ./dev.spacy
 
 6. The step above builds a new fine-tuned model in the ./model folder. You can use that model to build the knowledge base, as you can see in the following line:
 
