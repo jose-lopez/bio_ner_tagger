@@ -2,6 +2,13 @@
 Created on 2 oct. 2022
 
 @author: jose-lopez
+
+This script finds and reports the entities that are present in a corpus
+in order to fine tune a spacy pipeline. In our work we are dealing with
+biological objects described in ./data/bio-objects. Our goal in this code
+is to set and save train and evaluation examples to fine-tune a spaCy pipeline.
+This script also sets the config.cfg file required to fine-tune the pipeline later.
+
 '''
 
 from pathlib import Path
@@ -34,6 +41,7 @@ if __name__ == '__main__':
 
     utilities = Utility()  # This object makes available some general propose methods
 
+    # A trainer class object with the methods to set the NER examples and the configuration file.
     trainner = Trainner(MODEL_NAME, CORPUS_PATH, COMPONENTS_TO_UPDATE, Path(CONFIG_OUTPUT_PATH))
 
     print("\n" + ">>>>>>> Starting the entities tagging..........." + "\n")

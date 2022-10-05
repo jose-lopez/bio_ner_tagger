@@ -15,8 +15,8 @@ import spacy
 
 class Trainner(object):
     '''
-    This class relates with the necessary code to construct the set \
-    of training and evaluation examples for the NER component of a NLP \
+    This class relates is about the code to construct the set \
+    of training and evaluation examples for the training (fine-tuning) of the NER component of a NLP \
     model for biological objects (entities) detection.
     '''
 
@@ -49,7 +49,9 @@ class Trainner(object):
         self.__nlp = nlp
 
     def load_jsonl(self, path: str):
-
+        '''
+        A method for the reading of .json files.
+        '''
         data = []
 
         with open(path, 'r', encoding='utf-8') as reader:
@@ -60,7 +62,13 @@ class Trainner(object):
         return data
 
     def create_config(self, model_name: str, nlp: Language, components_to_update: list, output_path: Path):
-
+        '''
+        This function allows the setting a the spacy's config.cfg file.
+        There is a demo project that shows how to do this in this address:
+        https://github.com/explosion/projects/tree/v3/pipelines/ner_demo_update
+        The code below is a slightly different version that allows to train more than
+        one component in a pipeline.
+        '''
         # create a new config as a copy of the loaded pipeline's config
         config = nlp.config.copy()
 
@@ -98,6 +106,11 @@ class Trainner(object):
         config.to_disk(output_path)
 
     def setting_patterns(self, patterns: str, matcher: Matcher):
+        '''
+        This code allows to load the patterns when we are using a matcher instead of phrase matcher.
+        The text that we use to show how this code works is in ./data/corpus_en and the related
+        file or patterns is in ./data/patterns.
+        '''
 
         current_line = 1
 
@@ -114,6 +127,10 @@ class Trainner(object):
                 sys.exit()
 
     def setting_patterns_bio_objects(self, matcher: PhraseMatcher, nlp: Language):
+        '''
+        This code allows to load the patterns when we are using a phrasematcher instead of matcher.
+        This is the option that we follow to process the corpus available in ./data/corpus_covid.
+        '''
 
         path_bio_objects = "data/bio_objects"
 
@@ -145,6 +162,10 @@ class Trainner(object):
         return categories
 
     def token_from_span_in(self, spans: list, current_span: Span):
+        '''
+        This a function to check if a token in a spacy span is already part of one of the entities (spans)
+        of a sentence.
+        '''
 
         already_present = False
 
@@ -164,9 +185,17 @@ class Trainner(object):
         return already_present
 
     def tagging_file_sentences(self, sentences: list, matcher: PhraseMatcher, nlp: Language):
+        '''
+        The method used to set the doc.ents in a set of spacy sentences (docs).
+        In this method we also set those tokens in a sentence that correspond
+        to the biological names available in ./data/bio_objects. Each line in a
+        file in ./data/bio_objects defines the name of a biological object
+        and its synonyms (separated by a colon). This method returns the subsets of sentences
+        that have and don't entities (needed to fine-tune a model later).
+        '''
 
-        no_entities_docs = []
-        entities_docs = []
+        no_entities_docs = []  # Sentences that don't have entities.
+        entities_docs = []  # Sentences that do have entities.
 
         propn_hash = nlp.vocab.strings["PROPN"]
         nnp_hash = nlp.vocab.strings["NNP"]
@@ -179,10 +208,11 @@ class Trainner(object):
 
             for match_id, start, end in matches:
 
-                # A first attempt to add POS and TAG labels to those entities
-                # whose names are a single word token (JAK3, CDR4, and so on)
-                # We need to define multiword tokens to improve the POS and TAG labeling
-                # so multiword entities' names and tokens be available here.
+                """
+                A first attempt to add POS and TAG labels to single-token entities (JAK3, CDR4, etc.).
+                Further on it is required to define multi-word tokens to improve the POS and TAG labeling,
+                for those names of biological objects composed of more than one word.
+                """
 
                 if start == end - 1:
                     doc[start].pos = propn_hash

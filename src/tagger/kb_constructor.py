@@ -1,7 +1,14 @@
 '''
+
 Created on 2 oct. 2022
 
 @author: jose-lopez
+
+This script includes the necessary steps to build and report a knowledge base
+constructed from a corpus of regulatory sentences, available in ./data.
+An object of the Builder class offers the required method to fulfill
+the construction of the knowledge base.
+
 '''
 
 import sys
@@ -37,6 +44,7 @@ if __name__ == '__main__':
 
     print("\n" + ">>>>>>> Starting the knowledge base modeling..........." + "\n")
 
+    # A Builder class object with the methods to construct the knowledge base.
     builder = Builder(MODEL, CORPUS_PATH)
 
     print("\t" + "The pipeline's components are:")

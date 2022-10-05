@@ -14,16 +14,20 @@ import sys
 
 class Builder(object):
     '''
-    A class for the building of the knowledge base
+    The class with the methods for the building of the knowledge base.
     '''
 
     def __init__(self, model_name: str, corpus_path: str):
         '''
         Constructor
         '''
-        self.__model_name = model_name  # model to tune-up
-        self.__corpus_path = corpus_path  # The corpus of files to tag to build the NER examples
+        # model to tune-up
+        self.__model_name = model_name
 
+        # The corpus of files to analyze when we are building the knowledge base.
+        self.__corpus_path = corpus_path
+
+        # Loading the fine-tuned model to process the sentences and build the knowledge base
         print(f'Loading the model ({model_name})....')
         self.__nlp = spacy.load(model_name)
 
@@ -44,6 +48,9 @@ class Builder(object):
         self.__nlp = nlp
 
     def get_label(self, token: Token, entities: list):
+        '''
+        Returns an entity's label if a token is part of it.
+        '''
 
         label_ = ""
 
@@ -59,6 +66,10 @@ class Builder(object):
         return label_
 
     def get_regulatory_functions(self, relations_file_: str):
+        '''
+        This method returns the list of regulatory functions that we use to
+        establish if a VERB on process, is part of the verbs listed in ./data/relations-functions.txt.
+        '''
 
         relations = []
 
@@ -72,6 +83,9 @@ class Builder(object):
         return relations
 
     def in_relations(self, relation_: str, relations_: list):
+        '''
+        A method to establish if a relation (verb) is par of a list of relations (verbs)
+        '''
 
         in_relation = ""
 
@@ -83,6 +97,12 @@ class Builder(object):
         return in_relation
 
     def getting_bio_objects_categories(self):
+        '''
+        This method returns the list of main names, for each one of the biological objects
+        defined in ./data/bio_objects. Each line in a file in ./data/bio_objects describe
+        one biological object and the first name in it, defines the main name and the category
+        (or the NER label) for it.
+        '''
 
         path_bio_objects = "data/bio_objects"
 
@@ -110,12 +130,20 @@ class Builder(object):
         return categories
 
     def get_events_sents_noun_phrases(self, files: list, nlp: Language, categories: list, relations: list):
+        '''
+        This is the main method used to discover regulatory events in a corpus.
+        We have two options so far to accomplish this (the next method describes the second one).
+        In this case we explore roots in the nominal phrases (noun chunk) of a sentence and, from there, we
+        analyze if the root is a nsubj or a dobj. We check also if the each root have a VERB as its head (parent node).
+        If a nsubj and a dobj have the same VERB as its parent node, and the VERB is part of the biological relations
+        that we are interested in, then a valid regulatory event has been detected.
+        '''
 
-        # The regulation events and their related sentences
+        # The regulatory events and their related sentences
         events_sents = {}
 
-        # The lists of subjects and objects to consider when trying to build up the regulatory events
-        # This must be carefully debugged from a linguistic point of view
+        # The lists of subjects and objects to consider when trying to build up the regulatory events.
+        # This must be carefully debugged from a linguistic point of view (must be improved)
         subjects = ["nsubj", "nsubjpass", "csubj", "csubjpass", "agent", "expl"]
         objects = ["dobj", "pobj", "dative", "attr", "oprd"]
 
@@ -128,7 +156,7 @@ class Builder(object):
                 file_name = file_path.split("/")[2]
 
                 print(
-                    f'..getting regulatory events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}'+ "\n")
+                    f'..getting regulatory events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}' + "\n")
 
                 with open(file_path, 'r', encoding="utf8") as fl:
                     SENTENCES = [line.strip() for line in fl.readlines()]
@@ -139,7 +167,7 @@ class Builder(object):
                             if entity.start == entity.end - 1:
                                 print(f'{doc[entity.start].text}  {doc[entity.start].pos_}  {doc[entity.start].tag_}  {doc[entity.start].dep_}')
                         """
-                        # Finding a verb with a subject and a dobj from below (all the possible ones)
+                        # Finding a verb with a subject and a dobj related with it (all the possible ones)
 
                         for np_nsubj in doc.noun_chunks:
                             if np_nsubj.root.dep_ in subjects and np_nsubj.root.head.pos == VERB:
@@ -171,10 +199,18 @@ class Builder(object):
         return events_sents
 
     def get_events_sents(self, files: list, nlp: Language, categories: list, relations: list):
+        '''
+        This is the main method used to discover regulatory events in a corpus.
+        We have two options so far to accomplish this (the method above describes the first one).
+        In this case we define the possible nsubj(s) and dobj(s) in a sentence. We search
+        for those nsubj(s) and a dobj(s) that have a VERB as its head (parent node).
+        If a nsubj and a dobj have the same VERB as its parent node, and the VERB is part
+        of the biological relations that we are interested in, then a valid regulatory event has been detected.
+        '''
 
         # The regulation events and their related sentences
         events_sents = {}
-        
+
         # The lists of subjects and objects to consider when trying to build up the regulatory events
         # This must be carefully debugged from a linguistic point of view
         subjects = ["nsubj", "nsubjpass", "csubj", "csubjpass", "agent", "expl"]

@@ -31,7 +31,7 @@ doc = builder.nlp("HIV-1 preferentially infects CCR5 with high levels of CD4 and
 # Finding a verb with a subject and a dobj connected to it.
 
 for np_nsubj in doc.noun_chunks:
-    if np_nsubj.root.dep_ in subjects and np_nsubj.root.head.pos == VERB:
+    if (np_nsubj.root.dep_ in subjects) and np_nsubj.root.head.pos == VERB:
         for np_dobj in doc.noun_chunks:
             if (np_dobj.root.dep_ in objects) and np_nsubj.root.head.pos == np_dobj.root.head.pos:
                 # The lemma and the head's token index must be the same for nsubj and the dobj, so they are really connected)
