@@ -82,20 +82,6 @@ class Builder(object):
 
         return relations
 
-    def in_relations(self, relation_: str, relations_: list):
-        '''
-        A method to establish if a relation (verb) is par of a list of relations (verbs)
-        '''
-
-        in_relation = ""
-
-        for r in relations_:
-            if relation_ in r:
-                in_relation = relation_
-                break
-
-        return in_relation
-
     def getting_bio_objects_categories(self):
         '''
         This method returns the list of main names, for each one of the biological objects
@@ -173,14 +159,14 @@ class Builder(object):
                             if np_nsubj.root.dep_ in subjects and np_nsubj.root.head.pos == VERB:
                                 for np_dobj in doc.noun_chunks:
                                     if (np_dobj.root.dep_ in objects) and np_nsubj.root.head.pos == np_dobj.root.head.pos:
-                                        # The lemma and the head's token index must be the same for nsubj and the dobj, so they are really connected)
+                                        # The lemmas and the token's head index must be the same for nsubj and the dobj, so they are really connected)
                                         if np_nsubj.root.head.lemma_ == np_dobj.root.head.lemma_ and np_nsubj.root.head.i == np_dobj.root.head.i:
 
                                             SUBJ = self.get_label(np_nsubj.root, doc.ents)
                                             OBJ = self.get_label(np_dobj.root, doc.ents)
-                                            relation = self.in_relations(np_nsubj.root.head.lemma_, relations)
+                                            relation = np_nsubj.root.head.lemma_
 
-                                            if SUBJ in categories and OBJ in categories and relation:
+                                            if SUBJ in categories and OBJ in categories and relation in relations:
 
                                                 event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
                                                 # print(event)
@@ -194,7 +180,7 @@ class Builder(object):
 
                 FILE_ON_PROCESS += 1
 
-            print("Corpus processing done" + "\n")
+            print("\n" + "Corpus processing done" + "\n")
 
         return events_sents
 
@@ -205,7 +191,7 @@ class Builder(object):
         In this case we define the possible nsubj(s) and dobj(s) in a sentence. We search
         for those nsubj(s) and a dobj(s) that have a VERB as its head (parent node).
         If a nsubj and a dobj have the same VERB as its parent node, and the VERB is part
-        of the biological relations that we are interested in, then a valid regulatory event has been detected.
+        of the biological relations that we are interested in, then, a valid regulatory event has been detected.
         '''
 
         # The regulation events and their related sentences

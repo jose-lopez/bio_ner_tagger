@@ -1,3 +1,5 @@
+event('ACE2',bind,'SARS-COV').
+Angiotensin-converting enzyme 2 (ACE2), the C-type lectin CD209L (also known L-SIGN), and DC-SIGN bind SARS-CoV, but ACE2 appears to be the key functional receptor for the virus.
 event('ACE2',convert,'ACE2').
 These include the different levels of the ubiquitously present human angiotensin I converting enzyme 2 (ACE2) receptors gene expression and its variant alleles, the different binding affinities of ACE2 to the virus spike (S) protein given its L- and S-subtypes and the subsequent extent of innate immunity-related hypercytokinemia.
 These three factors increase the expression of angiotensin I converting enzyme 2 (ACE2), a key receptor involved in the entry of SARS-CoV-2-the etiological agent of COVID-19- into respiratory tract epithelial cells.
@@ -7,14 +9,20 @@ Here we established a quantitative fusion assay dependent on severe acute respir
 Recently it was shown that the SARS-CoV-2 spike protein, binds to the human angiotensin I converting enzyme 2 (ACE2).
 Recently it was shown that the SARS-CoV-2 spike protein binds to the human angiotensin I converting enzyme 2 (ACE2).
 event('ACE2',bind,'SARS-COV-2').
-Inhaled modified recombinant human ACE2, may bind SARS-CoV-2 and mitigate lung damage.
-event('CD4',express,'CCR5').
-Immunohistochemical analysis of 15 cases has consistently revealed that infiltrating CD4(+) and CD8(+) T cells in the submucosa predominantly expressed CCR5 and CXCR3.
-event('SARS-COV-2',affect,'ACE2').
-It remains unclear whether SARS-CoV-2 affects how ACE2 and ACE work.
+ACE2, in concert with the protease TMPRSS2 binds the novel coronavirus SARS-CoV-2 and facilitates its cellular entry.
+event('ACE2',mediate,'SARS-COV').
+Angiotensin converting enzyme-2 (ACE2) receptors mediate the entry into the cell of three strains of coronavirus: SARS-CoV, NL63 and SARS-CoV-2.
 event('GLYCOPROTEIN',bind,'ACE2').
 The spike (S) glycoprotein binds ACE2 and promotes SARS-CoV-2 entry into host cells.
 event('SARS-COV',bind,'ACE2').
 These results suggest that when SARS-CoV binds ACE2 it is internalized and penetrates early endosomes in a clathrin-dependent manner and that the cytoplasmic tail of ACE2 is not required for the penetration of SARS-CoV.
 event('SARS-COV-2',bind,'ACE2').
 It was found that SARS-CoV-2 binds ACE2 with a higher affinity than SARS-CoV, which may partly explain that SARS-CoV-2 is much more infectious than SARS-CoV.
+event('SARS-COV',recognize,'ACE2').
+SARS-CoV, SARS-CoV-2, and HCoV-NL63 recognize ACE2 as the natural receptor but present a distinct binding interface to ACE2 and a different network of residue-residue contacts.
+event('CCR5',express,'CD4').
+However, maraviroc intensification did increase the percentage of CCR5 expressing CD4+ and CD8+ T-cells, and the plasma levels of the CCR5 ligand MIP-1β.
+event('CD4',bind,'GLYCOPROTEIN').
+The cell surface receptors CD4 and CCR5 bind CCR5-tropic HIV Envelope (Env) glycoprotein during virus attachment.
+event('CCR5',bind,'CXCR4').
+R5 HIV-1 binds CCR5, X4 HIV-1 binds CXCR4, and dual-tropic HIV-1 can bind either coreceptor for cellular entry.

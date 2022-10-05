@@ -210,7 +210,7 @@ class Trainner(object):
 
                 """
                 A first attempt to add POS and TAG labels to single-token entities (JAK3, CDR4, etc.).
-                Further on it is required to define multi-word tokens to improve the POS and TAG labeling,
+                Further on it is required to define multi-word tokens to improve the POS and TAG labeling
                 for those names of biological objects composed of more than one word.
                 """
 

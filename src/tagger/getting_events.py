@@ -39,9 +39,9 @@ for np_nsubj in doc.noun_chunks:
 
                     SUBJ = builder.get_label(np_nsubj.root, doc.ents)
                     OBJ = builder.get_label(np_dobj.root, doc.ents)
-                    relation = builder.in_relations(np_nsubj.root.head.lemma_, relations)
+                    relation = np_nsubj.root.head.lemma_
 
-                    if SUBJ in categories and OBJ in categories and relation:
+                    if SUBJ in categories and OBJ in categories and relation in relations:
 
                         event = "event('{}',{},'{}')".format(SUBJ, relation, OBJ)
                         print(event)

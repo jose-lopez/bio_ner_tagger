@@ -1,0 +1,25 @@
+event('CD4',express,'CD4').
+CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
+event('ACE2',bind,'SARS-COV').
+Angiotensin-converting enzyme 2 (ACE2), the C-type lectin CD209L (also known L-SIGN), and DC-SIGN bind SARS-CoV, but ACE2 appears to be the key functional receptor for the virus.
+event('ACE2',convert,'ACE2').
+These include the different levels of the ubiquitously present human angiotensin I converting enzyme 2 (ACE2) receptors gene expression and its variant alleles, the different binding affinities of ACE2 to the virus spike (S) protein given its L- and S-subtypes and the subsequent extent of innate immunity-related hypercytokinemia.
+event('CD4',promote,'CCR5').
+Interaction of the human immunodeficiency virus type 1 (HIV-1) gp120 envelope glycoprotein with the primary receptor, CD4 promotes binding to a chemokine receptor, either CCR5 or CXCR4.
+event('CD4',stimulate,'CD4').
+CD4+Jurkat cells were incubated in the presence or absence of anti-CD4 to stimulate CD4, or with SDF-1 alpha, a cognate ligand of CXCR4.
+event('ACE2',bind,'SARS-COV-2').
+Inhaled modified recombinant human ACE2, may bind SARS-CoV-2 and mitigate lung damage.
+event('CD4',express,'CCR5').
+Immunohistochemical analysis of 15 cases has consistently revealed that infiltrating CD4(+) and CD8(+) T cells in the submucosa predominantly expressed CCR5 and CXCR3.
+In CD4 expressing CCR5 and CXCR4 double positive NIH 3 T3 cells, immunoprecipitation followed by Western blot analysis revealed that CCR5 was associated with CXCR4 and CD4.
+event('GLYCOPROTEIN',bind,'ACE2').
+The spike (S) glycoprotein binds ACE2 and promotes SARS-CoV-2 entry into host cells.
+event('SARS-COV',bind,'ACE2').
+These results suggest that when SARS-CoV binds ACE2 it is internalized and penetrates early endosomes in a clathrin-dependent manner and that the cytoplasmic tail of ACE2 is not required for the penetration of SARS-CoV.
+event('SARS-COV-2',bind,'ACE2').
+It was found that SARS-CoV-2 binds ACE2 with a higher affinity than SARS-CoV, which may partly explain that SARS-CoV-2 is much more infectious than SARS-CoV.
+event('SARS-COV',recognize,'ACE2').
+SARS-CoV, SARS-CoV-2, and HCoV-NL63 recognize ACE2 as the natural receptor but present a distinct binding interface to ACE2 and a different network of residue-residue contacts.
+event('CCR5',bind,'CXCR4').
+R5 HIV-1 binds CCR5, X4 HIV-1 binds CXCR4, and dual-tropic HIV-1 can bind either coreceptor for cellular entry.
