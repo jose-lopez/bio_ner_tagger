@@ -6,7 +6,7 @@ Created on 2 oct. 2022
 
 This script includes the necessary steps to build and report a knowledge base
 constructed from a corpus of regulatory sentences, available in ./data.
-An object of the Builder class offers the required method to fulfill
+An object of the Builder class offers the required methods to fulfill
 the construction of the knowledge base.
 
 '''
