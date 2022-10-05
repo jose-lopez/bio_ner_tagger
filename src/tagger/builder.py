@@ -120,7 +120,7 @@ class Builder(object):
         This is the main method used to discover regulatory events in a corpus.
         We have two options so far to accomplish this (the next method describes the second one).
         In this case we explore roots in the nominal phrases (noun chunk) of a sentence and, from there, we
-        analyze if the root is a nsubj or a dobj. We check also if the each root have a VERB as its head (parent node).
+        analyze if the root is a nsubj or a dobj. We check also if each root have a VERB as its head (parent node).
         If a nsubj and a dobj have the same VERB as its parent node, and the VERB is part of the biological relations
         that we are interested in, then a valid regulatory event has been detected.
         '''
