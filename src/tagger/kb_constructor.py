@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # Getting the categories of biological objects
     categories = builder.getting_bio_objects_categories()
 
-    print(f'Processing regulatory events from the corpus at ({CORPUS_PATH})....' + "\n")
+    print(f'Processing regulatory events from the corpus at ({CORPUS_PATH})....')
 
     # Using the noun phrases option
     events_sents = builder.get_events_sents_noun_phrases(files, builder.nlp, categories, relations)

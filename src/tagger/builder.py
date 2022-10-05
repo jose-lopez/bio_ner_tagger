@@ -141,8 +141,7 @@ class Builder(object):
 
                 file_name = file_path.split("/")[2]
 
-                print(
-                    f'..getting regulatory events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}' + "\n")
+                print("\n" + f'..getting regulatory events from -> {file_name}: {FILE_ON_PROCESS} | {len(files)}' + "\n")
 
                 with open(file_path, 'r', encoding="utf8") as fl:
                     SENTENCES = [line.strip() for line in fl.readlines()]
