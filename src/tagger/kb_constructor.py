@@ -104,4 +104,4 @@ if __name__ == '__main__':
 
         print(f'Knowledge base modeling finished !!!....')
     else:
-        print(f'There is not regulatory events in the corpus at: {CORPUS_PATH}')
+        print(f'There are not regulatory events in the corpus at: {CORPUS_PATH}')
