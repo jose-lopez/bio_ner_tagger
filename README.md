@@ -34,6 +34,8 @@ $ python src/tagger/kb_constructor.py --model=model/model-best --corpus=data/cor
 
 This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid. Both of them avalilable in the ./data projects's folder.
 
+Some details about the input and output related with this NLP experiment using spaCy:
+
 
 
 
