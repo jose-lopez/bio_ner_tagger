@@ -26,11 +26,11 @@ $ python src/tagger/setter.py --model=en_core_web_sm --corpus=data/corpus_sars_c
 
 $ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.spacy --paths.dev ./dev.spacy
 
-6. The step above builds a new fine-tuned model in the ./model folder. You can use that model to build the knowledge base, as you can see in the following line:
+6. The step above builds a new fine-tuned model in the ./model folder. You can use the fine-tuned model to build the knowledge base of regulatory events running line below:
 
 $ python src/tagger/kb_constructor.py --model=model/model-best --corpus=data/corpus_sars_cov
 
-7. The output of the step above are two files: kbase.pl and kbase.text, available in the data/knowledge_base folder.
+7. Two files are the output of the command line above: kbase.pl and kbase.text, available in the data/knowledge_base folder.
 
 This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid. Both of them avalilable in the ./data projects's folder.
 
