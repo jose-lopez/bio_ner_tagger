@@ -3,7 +3,7 @@ An experiment to tag ner entities related with biological molecular species usin
 
 The fine-tuning process includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the ner pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one set the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events.
 
-In order to run the python scripts mentioned above, please follow the next steps:
+In order to run the python scripts mentioned above, please follow the steps below:
 
 1. Install spaCy as you can see in: https://spacy.io/usage#quickstart.
 Be sure of having Python 3.9 in your system. We recomend to use a virtual environment as the spacy's installation instructions describes.
