@@ -30,7 +30,7 @@ $ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.
 
 $ python src/tagger/kb_constructor.py --model=model/model-best --corpus=data/corpus_sars_cov
 
-7. Two files are the output of the command line described above: kbase.pl and kbase.text, available in the data/knowledge_base folder. The kbase.pl file contains the set of regulatory events modeled and it is a Prolog style formatted file. The kbase.pl file is ready to be integrated in an inference system in order to explore possible regulatory pathways. On the other hand, the kbase.txt file list the regulatory events from kbase.pl, and offers the regulatory sentences from where the regulatory events are modeled. This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid; both of them avalilable in the ./data projects's folder.
+7. The command line that we describe above will produce two files as output: kbase.pl and kbase.text, available in the data/knowledge_base folder. The kbase.pl file contains the set of regulatory events modeled and it is a Prolog style formatted file. The kbase.pl file is ready to be integrated in an inference system in order to explore possible regulatory pathways. On the other hand, the kbase.txt file list the regulatory events from kbase.pl, and offers the regulatory sentences from where the regulatory events are modeled. This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid; both of them avalilable in the ./data projects's folder.
 
 
 
