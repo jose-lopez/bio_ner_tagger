@@ -1,7 +1,7 @@
 # bio_ner_tagger
-This is an NLP experiment about a) the POS, TAG, and NER tagging ofsentences related with biological molecular species and their interactions, using the spaCy library, b) fine-tuning a spacy's pipeline with the tagged sentences, and c) the identification of biological molecular species and their interactions in a corpus, and C) the construction of a knowledge base of regulatory events from them. Here we include the code for a) the ner tagging of the training examples, b) the definition of a configuration file to fine-tune a spacy's model, and C) how to use the fine-tuned model to build a knowledge base of regulatory events. The knowledge base is automatically organized based on the facilities available from the fine-tuned model and the spacy library itself.
+This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) fine-tuning a spacy's pipeline with the tagged sentences, and c) the identification of biological molecular species and their interactions in a corpus, and C) the construction of a knowledge base of regulatory events from them. Here we include the code for a) the ner tagging of the training examples, b) the definition of a configuration file to fine-tune a spacy's model, and C) how to use the fine-tuned model to build a knowledge base of regulatory events. The knowledge base is automatically organized based on the facilities available from the fine-tuned model and the spacy library itself.
 
-The fine-tuning process includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the ner pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one set the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
+The fine-tuning process includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
 
 Below an example of the knowledge base that we got:
 
@@ -19,7 +19,7 @@ event('CD4',bind,'GLYCOPROTEIN'),
 event('CCR5',bind,'CXCR4')
 ]).
 
-Below some of sentences from where the regularoty events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events that our code isn't able to detect yet.
+Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events that our code isn't able to detect yet.
 
 event('CD4',express,'CD4').
 CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
@@ -34,8 +34,8 @@ How to install and run our code:
 
 In order to run the python scripts mentioned above, please follow the steps below:
 
-1. Install spaCy as you can see in: https://spacy.io/usage#quickstart.
-Be sure of having Python 3.9 in your system. We recomend to use a virtual environment as the spacy's installation instructions describes.
+1. Install spaCy as you can see in: https://spacy.io/usage#quickstart.
+Be sure of having Python 3.9 in your system. We recommend using a virtual environment as the spacy's installation instructions describes.
 
 2. Clone the project and set the PYTHONPATH variable in order to point to the source code of this project.
 
@@ -59,4 +59,4 @@ $ python -m spacy train ./config_ner.cfg --output ./model --paths.train ./train.
 
 $ python src/tagger/kb_constructor.py --model=model/model-best --corpus=data/corpus_sars_cov
 
-7. The command line that we describe above will produce two files as output: kbase.pl and kbase.text, available in the data/knowledge_base folder. The kbase.pl file contains the set of regulatory events modeled and it is a Prolog style formatted file. The kbase.pl file defines a network of interactionsand it is ready to be loaded in an inference system, in order to explore possible regulatory pathways. On the other hand, the kbase.txt file list the regulatory events from kbase.pl, and offers the regulatory sentences from where the regulatory events are modeled. This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid; both of them avalilable in the ./data projects's folder.
+7. The command line that we describe above will produce two files as output: kbase.pl and kbase.text, available in the data/knowledge_base folder. The kbase.pl file contains the set of regulatory events modeled and it is a Prolog style formatted file. The kbase.pl file defines a network of interactions and it is ready to be loaded in an inference system, in order to explore possible regulatory pathways. On the other hand, the kbase.txt file lists the regulatory events from kbase.pl, and offers the regulatory sentences from where the regulatory events are modeled. This repo offers two small sets of sentences to play with: the corpus_sars_cov and the corpus_covid; both of them available in the ./data projects's folder.
