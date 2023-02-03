@@ -1,5 +1,5 @@
 # bio_ner_tagger
-This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) the fine-tuning a spacy's pipeline with the tagged sentences, c) the identification of biological molecular species and their interactions in a corpus, and d) the construction of a knowledge base of regulatory events from them.
+This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) the fine-tuning of a spacy's pipeline with the tagged sentences, c) the identification of biological molecular species and their interactions in a corpus, and d) the construction of a knowledge base of regulatory events from them.
 
 The fine-tuning process includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
 
@@ -19,7 +19,7 @@ event('CD4',bind,'GLYCOPROTEIN'),
 event('CCR5',bind,'CXCR4')
 ]).
 
-Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events that our code isn't able to detect yet.
+Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events (entitiies and their relations), that our code isn't able to detect yet.
 
 event('CD4',express,'CD4').
 CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
