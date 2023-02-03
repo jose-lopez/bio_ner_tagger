@@ -5,7 +5,6 @@ The fine-tuning process includes basic POS, TAG and NER tagging. Our code is abo
 
 Below an example of the kind of knowledge bases that we get:
 
-base([
 event('ACE2',bind,'SARS-COV'),
 event('ACE2',convert,'ACE2'),
 event('ACE2',bind,'SARS-COV-2'),
@@ -16,8 +15,8 @@ event('SARS-COV-2',bind,'ACE2'),
 event('SARS-COV',recognize,'ACE2'),
 event('CCR5',express,'CD4'),
 event('CD4',bind,'GLYCOPROTEIN'),
-event('CCR5',bind,'CXCR4')
-]).
+event('CCR5',bind,'CXCR4').
+
 
 Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events (entitiies and their relations), that our code isn't able to detect yet.
 
