@@ -23,15 +23,20 @@ event('ACE2',bind,'SARS-COV-2'),
 Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events (entitiies and their relationships), that our code isn't able to detect yet.
 
 event('ACE2',bind,'SARS-COV').
+
 Angiotensin-converting enzyme 2 (ACE2), the C-type lectin CD209L (also known L-SIGN), and DC-SIGN bind SARS-CoV, but ACE2 appears to be the key functional receptor for the virus.
 
 event('CD4',express,'CD4').
+
 CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
 
 event('CD4',promote,'CCR5').
+
 Interaction of the human immunodeficiency virus type 1 (HIV-1) gp120 envelope glycoprotein with the primary receptor, CD4 promotes binding to a chemokine receptor, either CCR5 or CXCR4.
 
+
 How to install and run our code:
+-------------------------------
 
 In order to run the python scripts mentioned above, please follow the steps below:
 
