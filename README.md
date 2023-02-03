@@ -3,7 +3,7 @@ This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences re
 
 The fine-tuning process includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
 
-Below an example of the knowledge base that we got:
+Below an example of the kind of knowledge bases that we get:
 
 base([
 event('ACE2',bind,'SARS-COV'),
