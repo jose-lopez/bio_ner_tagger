@@ -1,9 +1,9 @@
 # bio_ner_tagger
 This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) the fine-tuning of a spacy's pipeline with the tagged sentences, c) the identification of biological molecular species and their interactions in a corpus, and d) the construction of a knowledge base of regulatory events from them.
 
-The fine-tuning process that we make includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components.There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model (en_core_web_sm, for instance). The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
+The fine-tuning process that we make includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components. There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model. The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
 
-Below an example of the kind of knowledge bases that we get:
+Below an example of the kind of knowledge base that we get:
 
 base([
 
