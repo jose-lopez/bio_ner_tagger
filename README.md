@@ -1,42 +1,42 @@
 # bio_ner_tagger
-This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) the fine-tuning of a spacy's pipeline with the tagged sentences, c) the identification of biological molecular species and their interactions in a corpus, and d) the construction of a knowledge base of regulatory events from them.
-
-The fine-tuning process that we make includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components. There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model. The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
+This is an NLP experiment about a) the POS, TAG, and NER tagging of sentences related with biological molecular species and their interactions, using the spaCy library, b) the fine-tuning of a spacy's pipeline with the tagged sentences, c) the identification of biological molecular species and their interactions in a corpus, and d) the construction of a knowledge base of regulatory events from them. The fine-tuning process that we make includes basic POS, TAG and NER tagging. Our code is about the fine-tuning of the tagger and the NER pipeline's components.
 
 Below an example of the kind of knowledge base that we get:
 
 base([
 
-event('ACE2',bind,'SARS-COV'),
+event('CD4',promote,'CCR5').
 
 event('CD4',express,'CD4').
 
-event('CD4',promote,'CCR5').
-
-event('ACE2',bind,'SARS-COV-2'),
+event('ACE2',bind,'SARS-COV'),
 
 ..
 
 ]).
 
 
-Below are some sentences from where the regulatory events came from. Our work at the moment is about how to use linguistic features and the spacy's library linguistic facilities, in order to improve the detection of regulatory events in a sentence. It is possible to see below that there are some sentences with regulatory events (entitiies and their relationships), that our code isn't able to detect yet.
+Below are some regulatory events and their related sentences. Such sentences are automatically selected from PubMed using a system developed by us (see details in [1]). Our work at the moment is about how to use the linguistic features of a sentence, in order to improve a) the modeling of regulatory events and b) the quality of the knowledge bases that we are modeling from the regulatory corpuses that we automatically collect. It is possible to see below that there are some sentences with regulatory events that our system isn't able to detect yet. For instance, the  first regulatory sentence below contains other regulatory events different from event('CD4',promote,'CCR5'). In fact, a better modeling  should says: event('CD4',promote,'HIV-1'), event('gp120', interacts, 'CD4'), event('HIV-1',bind,'CCR5') and event('HIV-1',bind,'CXCR4').
 
-event('ACE2',bind,'SARS-COV').
+event('CD4',promote,'CCR5').
 
-Angiotensin-converting enzyme 2 (ACE2), the C-type lectin CD209L (also known L-SIGN), and DC-SIGN bind SARS-CoV, but ACE2 appears to be the key functional receptor for the virus.
+Interaction of the human immunodeficiency virus type 1 (HIV-1) gp120 envelope glycoprotein with the primary receptor CD4, promotes binding to a chemokine receptor, either CCR5 or CXCR4.
 
 event('CD4',express,'CD4').
 
 CD4 and GHOST(3)-engineered to express stably CD4 and the chemokine receptors CCR1, CCR2b, CCR3, CCR5, or CXCR4, or the orphan receptors BOB/gpr15 or Bonzo/STRL33/TYMSTR.
 
-event('CD4',promote,'CCR5').
+event('ACE2',bind,'SARS-COV').
 
-Interaction of the human immunodeficiency virus type 1 (HIV-1) gp120 envelope glycoprotein with the primary receptor, CD4 promotes binding to a chemokine receptor, either CCR5 or CXCR4.
+Angiotensin-converting enzyme 2 (ACE2), the C-type lectin CD209L (also known L-SIGN), and DC-SIGN bind SARS-CoV, but ACE2 appears to be the key functional receptor for the virus.
+
+[1] Details of the current system can be viewed at: https://github.com/biopatternsg/biopatternsg and has been explained in López, J., Ramírez, Y., Dávila, J., & Bastidas, M. (2021). A LOGICAL AND ONTOLOGICAL FRAMEWORK FOR KNOWLEDGE DISCOVERY ON GENE REGULATORY NETWORKS. CASE STUDY: BILE ACID AND XENOBIOTIC SYSTEM (BAXS). JOURNAL OF BIOINFORMATICS AND GENOMICS, (2 (14). https://doi.org/10.18454/jbg.2020.2.14.1 (Original work published December 14, 2020).
 
 
 How to install and run our code:
 -------------------------------
+
+There are two python scripts of interest here: setter.py and kb_constructor.py. The first one sets the examples to fine-tune the model and defines the configuration file to train (fine-tune) a spacy model. The second script is related to the automatic building of a knowledge base of regulatory events from a set of regulatory sentences.
 
 In order to run the python scripts mentioned above, please follow the steps below:
 
