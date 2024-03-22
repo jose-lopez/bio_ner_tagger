@@ -16,7 +16,7 @@ event('ACE2',bind,'SARS-COV'),
 ]).
 
 
-Below are some regulatory events and their related sentences. Such sentences are automatically selected from PubMed using a system developed by us (see details in [1]). Our work at the moment is about how to use the linguistic features of a sentence, in order to improve a) the modeling of regulatory events and b) the quality of the knowledge bases that we are modeling from the regulatory corpuses that we automatically collect. It is possible to see below that there are some sentences with regulatory events that our system isn't able to detect yet. For instance, the  first regulatory sentence below contains other regulatory events different from event('CD4',promote,'CCR5'). In fact, a better modeling  should says: event('CD4',promote,'HIV-1'), event('gp120', interacts, 'CD4'), event('HIV-1',bind,'CCR5') and event('HIV-1',bind,'CXCR4').
+Below are some regulatory events and their related sentences. Such sentences are automatically selected from PubMed using a system developed by us (see details in [1]). Our work at the moment is about how to use the linguistic features of a sentence, in order to improve a) the modeling of regulatory events and b) the quality of the knowledge bases that we are modeling from the regulatory corpora that we automatically collect. It is possible to see below that there are some sentences with regulatory events that our system isn't able to detect yet. For instance, the  first regulatory sentence below contains other regulatory events different from event('CD4',promote,'CCR5'). In fact, a better modeling  should says: event('CD4',promote,'HIV-1'), event('gp120', interact, 'CD4'), event('HIV-1',bind,'CCR5') and event('HIV-1',bind,'CXCR4').
 
 event('CD4',promote,'CCR5').
 
@@ -55,7 +55,7 @@ $ export PYTHONPATH=$PYTHONPATH:$HOME/bio_ner_tagger/src
 
 4. To set the training and evaluation examples, and the fine-tuning configuration file, proceed as follows:
 
-$ python src/tagger/setter.py --model=en_core_web_sm --corpus=data/corpus_sars_cov --components_to_update=ner,tagger --config_output_path=./config_ner.cfg
+$ python src/tagger/setter.py --model=en_core_web_sm --corpus=data/corpus_sars_cov --components_to_update=tok2vec,ner,tagger --config_output_path=./config.cfg
 
 5. The steps above define the files train.spacy and dev.spacy, and the config_ner.cfg configuration file. In order to fine-tune a model, please run:
 
