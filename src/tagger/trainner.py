@@ -15,9 +15,11 @@ import spacy
 
 class Trainner(object):
     '''
-    This class relates is about the code to construct the set \
-    of training and evaluation examples for the training (fine-tuning) of the NER component of a NLP \
-    model for biological objects (entities) detection.
+    This class relates with the code to construct the set \
+    of training and evaluation examples for the training (fine-tuning) \
+    of the NER and tagger components of a NLP \
+    model for the biological objects (entities) detection \
+    in a set of biomedical sentences.
     '''
 
     def __init__(self, model_name: str, corpus_path: Path, components: list, config_path: Path):
@@ -50,7 +52,7 @@ class Trainner(object):
 
     def load_jsonl(self, path: str):
         '''
-        A method for the reading of .json files.
+        A method for the reading of a .jsonl file.
         '''
         data = []
 
@@ -63,10 +65,10 @@ class Trainner(object):
 
     def create_config(self, model_name: str, nlp: Language, components_to_update: list, output_path: Path):
         '''
-        This function allows the setting a the spacy's config.cfg file.
+        This function allows the setting of a spacy config.cfg file.
         There is a demo project that shows how to do this in this address:
         https://github.com/explosion/projects/tree/v3/pipelines/ner_demo_update
-        The code below is a slightly different version that allows to train more than
+        The code below is a slightly different version from there, and allows to train more than
         one component in a pipeline.
         '''
         # create a new config as a copy of the loaded pipeline's config

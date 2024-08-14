@@ -1,0 +1,564 @@
+Drug-Related Side Effects and Adverse Reactions
+Myelodysplastic Syndromes
+CHROMIUM
+CD4
+CD8A
+FCGR3A
+IFNA1
+Severe Acute Respiratory Syndrome
+FEVER
+CHILLS
+MYALGIA
+COUGH
+Signs and Symptoms Respiratory
+INFECTIONS
+LYMPHOPENIA
+Liver Failure
+COVID-19
+NEOPLASMS
+Uterine Cervical Neoplasms
+IFNG
+HLA-A
+Colorectal Neoplasms
+IL2
+HLA-C
+IFNA8
+Cytomegalovirus Infections
+PMEL
+MELANOMA
+CD28
+Virus Diseases
+HIV Infections
+CD34
+MLANA
+TYR
+MAGEA3
+B2M
+Hepatitis B
+INFLAMMATION
+Uterine Cervical Dysplasia
+CD1A
+CD68
+Papillomavirus Infections
+WDR11
+Autistic Disorder
+CD209
+Alopecia Areata
+Autoimmune Diseases
+ALOPECIA
+ICAM1
+NEUROBLASTOMA
+CTAG1A
+CD14
+CD19
+ARHGAP45
+MYO1G
+PTPRC
+TRBV20OR9-2
+Parasitic Diseases
+TYROSINE
+IL2RA
+CTLA4
+PRTN3
+Granulomatosis with Polyangiitis
+CD69
+TNF
+Lung Neoplasms
+TMEM189
+UBE2V1
+HLA-DRB1
+NCAM1
+B3GAT1
+HLA-B
+MLH1
+Chemical and Drug Induced Liver Injury
+Hepatitis C
+CD80
+CD40LG
+Hepatitis C Chronic
+Liver Diseases
+ELANE
+Leukemia Myeloid
+Leukemia Myelogenous Chronic BCR-ABL Positive
+LEUKEMIA
+FAM72B
+GAG
+Acute Disease
+Influenza Human
+CHROMIUM-51
+ISCOMATRIX
+Testicular Neoplasms
+IGHV1-9
+Sleep Wake Disorders
+Heredodegenerative Disorders Nervous System
+Chronic Disease
+Paraparesis Tropical Spastic
+ERBB2
+Neoplasm Metastasis
+Breast Neoplasms
+SLTM
+CCR7
+IL15
+IL4
+IL10
+Hereditary Breast and Ovarian Cancer Syndrome
+HFE
+HEMOCHROMATOSIS
+Carcinoma Renal Cell
+Colonic Neoplasms
+CARCINOMA
+STRONGYLOIDIASIS
+IVERMECTIN
+Malabsorption Syndromes
+Intestinal Pseudo-Obstruction
+STAT1
+ERVK-6
+Coronavirus Infections
+SWAYBACK
+Neglected Diseases
+ONCHOCERCIASIS
+Elephantiasis Filarial
+SCABIES
+Fecal Incontinence
+MALARIA
+REMDESIVIR
+CHLOROQUINE
+SPECC1
+triphosphoric acid
+Adenosine Triphosphate
+DEATH
+RNA Virus Infections
+SOFOSBUVIR
+RIBAVIRIN
+IDX184
+Coronaviridae Infections
+UMIFENOVIR
+FAVIPIRAVIR
+PHARYNGITIS
+DYSPNEA
+FATIGUE
+PNEUMONIA
+Respiratory Distress Syndrome
+Multiple Organ Failure
+CRP
+Liver Cirrhosis Biliary
+DLAT
+Calcinosis Cutis
+Kidney Neoplasms
+MUC1
+PLIN2
+CS
+PARAFORM
+Mental Disorders
+Psychotic Disorders
+SCHIZOPHRENIA
+Affective Disorders Psychotic
+Depressive Disorder
+CD2
+CALCIUM
+Inositol 1 4 5-Trisphosphate
+Tetradecanoylphorbol Acetate
+CD5
+HLA-G
+HLA-E
+TOXOPLASMOSIS
+HSPA8
+Birdshot Chorioretinopathy
+KRT20
+GRANULOMA
+Melanoma Cutaneous Malignant
+Leukemic Infiltration
+Stomach Neoplasms
+Buschke-Lowenstein Tumor
+LIPOPOLYSACCHARIDES
+TLR4
+Poly I-C
+TLR3
+CPG-OLIGONUCLEOTIDE
+TLR9
+IMIQUIMOD
+TLR7
+CD40
+CD86
+CD83
+IL12B
+CYMD
+INDOMETHACIN
+CELECOXIB
+ESOMEPRAZOLE
+DINOPROSTONE
+HLA-DMA
+HLA-DPB1
+GZMB
+FOXP3
+PROSTAGLANDINS
+Ovarian Neoplasms
+TRAJ60
+Myoclonic Epilepsies Progressive
+X-Linked Combined Immunodeficiency Diseases
+CD8B
+HLA-DRB3
+Graft vs Host Disease
+ACKR1
+HAVCR2
+Encephalitis Herpes Simplex
+Herpes Simplex
+Keratitis Herpetic
+Neonatal herpes
+N(EPSILON)-PALMITOYLLYSINE
+TLR2
+LIPOPEPTIDES
+CLIP1
+NXF1
+TUBERCULOSIS
+Opportunistic Infections
+Latent Tuberculosis
+IL6
+Lupus Erythematosus Systemic
+IL1A
+ITGAM
+SPONDYLARTHRITIS
+COLITIS
+ARTHRITIS
+IL17A
+Arthritis Psoriatic
+KIR3DL1
+KIR3DL2
+PRE-ECLAMPSIA
+KIR2DL4
+ISG20
+HCP5
+ZNRD1
+HYPERTHYROIDISM
+Leukemia Myeloid Acute
+Paralyses Familial Periodic
+TRIIODOTHYRONINE
+THYROXINE
+THYROTROPIN
+Adenocarcinoma Follicular
+PREDNISOLONE
+METHIMAZOLE
+TPO
+CD200
+KLRK1
+Immune System Diseases
+MYOSITIS
+Muscle Neoplasms
+300896
+NECROSIS
+ATROPHY
+IFIH1
+MORC3
+TRIM33
+Hereditary Myopathy with Early Respiratory Failure
+MGA
+Myotonic Dystrophy
+RHAMNOSE
+Postoperative Complications
+Carcinoma Non-Small-Cell Lung
+Postoperative Hemorrhage
+Encephalomyelitis Autoimmune Experimental
+Multiple Sclerosis
+MS4A1
+IGHM
+IGHD
+TNFSF18
+Leishmaniasis Cutaneous
+Skin Diseases
+TGFB1
+IL23A
+LEISHMANIASIS
+Acquired Immunodeficiency Syndrome
+Mycobacterium avium-intracellulare Infection
+Mycobacterium Infections Nontuberculous
+Bacterial Infections
+PDCD1
+HLA-S
+APP
+KLRD1
+KLRC1
+ID3
+ID1
+ID2
+IKZF2
+Familial antiphospholipid syndrome
+CXADRP1
+Lymphoma B-Cell
+IL7
+Cytokine Release Syndrome
+FIBROSIS
+Liver Cirrhosis
+ALB
+BILIRUBIN
+SARCOIDOSIS
+IL12A
+EBI3
+GAPDH
+Neurodegenerative Diseases
+Lymphoma Non-Hodgkin
+Multiple Myeloma
+Leukemia T-Cell
+Lymphoma Large B-Cell Diffuse
+Burkitt Lymphoma
+LYMPHOMA
+Hodgkin Disease
+Multi-centric Castleman_s Disease
+Kidney Diseases
+SUPERINFECTION
+Anti-Neutrophil Cytoplasmic Antibody-Associated Vasculitis
+GLOMERULONEPHRITIS
+Dog Diseases
+MILTEFOSINE
+Meglumine Antimoniate
+ALLOPURINOL
+DASABUVIR
+AIDS-Associated Nephropathy
+Neurocognitive Disorders
+TENOFOVIR
+Signs and Symptoms
+LEUKOCYTOSIS
+MYCOSES
+TNFRSF9
+CSF2
+Respiratory Tract Infections
+Invasive Fungal Infections
+PSORIASIS
+CD63
+CD81
+UBR5
+FOXO1
+TBX21
+TRETINOIN
+IL37
+RARA
+IL23R
+PRMT5
+Precancerous Conditions
+Carotid Stenosis
+ATHEROSCLEROSIS
+Cardiovascular Diseases
+CCL2
+VCAM1
+MDK
+TRAMETINIB
+STREPTOZOCIN
+Diabetes Mellitus
+IL31
+IGH-V7183
+GATA3
+IL31RA
+GLS
+MALT1
+JUN
+HYPERPLASIA
+IPILIMUMAB
+ICOS
+TERT
+APOE
+NFKB1
+Coronary Artery Disease
+KPNA4
+KPNA1
+CTSD
+LISTERIOSIS
+2-tert-butyl-9-fluoro-3 6-dihydro-7H-benz(h)imidazo(4 5-f)isoquinoline-7-one
+ASTHMA
+Status Asthmaticus
+SERPINB1-PS1
+EOSINOPHILIA
+Polylactic Acid-Polyglycolic Acid Copolymer
+IL13
+CCL11
+CLCA1
+STAT6
+CIRSILINEOL
+Inflammatory Bowel Diseases
+Crohn Disease
+Trinitrobenzenesulfonic Acid
+JAK2
+SOCS1
+Dextran Sulfate
+Gastrointestinal Diseases
+CD44
+IFNA
+STAT4
+Carcinoma Hepatocellular
+Weight Loss
+PDCD1LG2
+PTPN2
+DYSBIOSIS
+STAT3
+Arthritis Rheumatoid
+NDUFA13
+Arthritis Experimental
+IL1B
+TNFSF11
+TIMP1
+SPONDYLARTHROPATHIES
+TIPIFARNIB
+Hepatitis Autoimmune
+GPT
+IL27
+IL6ST
+CXCL10
+IL27RA
+IL9
+IL25
+IL33
+TOFACITINIB
+Colitis Ulcerative
+MESALAMINE
+MUCOSITIS
+CXCR6
+CXCR3
+Drug Hypersensitivity
+CCR2
+CCR3
+CCR4
+CCR5
+CXCR4
+IL5
+Hypersensitivity Immediate
+VIREMIA
+Simian Acquired Immunodeficiency Syndrome
+FAS
+TNFRSF1A
+FASLG
+BCL2
+BAX
+SELL
+ITGA4
+TRITIUM
+THYMIDINE
+ITIH4
+Malaria Cerebral
+PRF1
+Brain Diseases
+CCR1
+ENV
+Sexually Transmitted Diseases
+IL1RN
+RELA
+CASP3
+PARP1
+BIRC3
+Stenosis Pulmonary Artery
+Leukemia-Lymphoma Adult T-Cell
+DNTT
+deoxyuridine triphosphate
+CCL3
+Triple Negative Breast Neoplasms
+MARAVIROC
+PDC
+XCR1
+Peripheral Nervous System Diseases
+CCL5
+FCGR3
+S100A9
+ITGAX
+ITGAE
+CCL4
+CCL19
+CCL20
+PCGF2
+CCR9
+CXCL12
+CCL25
+Nasopharyngeal Carcinoma
+Anemia Aplastic
+PLERIXAFOR
+DEHYDROXYMETHYLEPOXYQUINOMICIN
+AXITINIB
+CD274
+AKT1
+FOXO3
+NAD
+SIRT1
+SIRT2
+SIRT3
+Ventricular Remodeling
+SIRT4
+SIRT5
+SIRT6
+Epstein-Barr Virus Infections
+Sarcoma Kaposi
+SIRT7
+Endometrial Neoplasms
+IFNA2
+IFNB1
+SULFUR
+CD177
+CD247
+MICA
+GLIOMA
+GLIOBLASTOMA
+MICB
+Hepatitis B Chronic
+Glucose Intolerance
+Communicable Diseases
+BNLF2A
+SEC14L2
+CYP1B1
+HYPOXIA
+Paraneoplastic Syndromes Nervous System
+Spinocerebellar Degenerations
+CDR2
+Stress Disorders Post-Traumatic
+Anxiety Disorders
+War-Related Injuries
+Wounds and Injuries
+614878
+TP53
+NEF
+PEPTIDES
+HLA-DOA
+GLUTAMINE
+SEPHAROSE
+Sodium Dodecyl Sulfate
+incomplete Freund_s adjuvant
+PROMUNE
+POLYSTYRENES
+MESOTHELIOMA
+Mesothelioma Malignant
+Persistent Infection
+LMP-1
+PSMB9
+PDLIM7
+Neoplasms Squamous Cell
+CLCA2
+Pancreatic Neoplasms
+NITROGEN
+TG
+Hashimoto Disease
+THYROIDITIS
+GOITER
+FRK
+KLK3
+FOLH1
+ACP3
+Prostatic Neoplasms Castration-Resistant
+Prostatic Neoplasms
+EDEMA
+Diabetes Mellitus Type 1
+INS
+PTPRN
+GAD2
+G6PC2
+LIPIDS
+TRAV12-2
+ESR1
+IMPA1
+MRAP
+DYNLT1
+MAMU-I
+ERVK-20
+REV
+TAT
+VIF
+VPR
+VPU
+CDKN2B
+Spondylitis Ankylosing
+Rheumatic Diseases
+Arthritis Reactive
+270100

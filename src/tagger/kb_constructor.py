@@ -13,8 +13,8 @@ the construction of the knowledge base.
 
 import sys
 
-from tagger.builder import Builder
-from tagger.utilities import Utility
+from src.tagger.builder import Builder
+from src.tagger.utilities import Utility
 
 
 if __name__ == '__main__':
@@ -40,7 +40,7 @@ if __name__ == '__main__':
         CORPUS_PATH = args[1].split("=")[1]
     else:
         print("Please check the arguments at the command line")
-        sys.exit()
+        sys_exit = sys.exit()
 
     print("\n" + ">>>>>>> Starting the knowledge base modeling..........." + "\n")
 
