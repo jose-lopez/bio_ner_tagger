@@ -150,7 +150,8 @@ def print_kb(knowledge_base: dict, root: str) -> None:
 
 if __name__ == '__main__':
     """
-
+    A python script that generates the KB of events and entities, in prolog format using, the 
+    predictions coming from PubTator.
     """
 
     print("\n" + f'kb_generator: A python script to get regulatory events from pubtator files' + "\n")
@@ -171,6 +172,7 @@ if __name__ == '__main__':
         exit()
 
     nltk.download('punkt')
+    nltk.download('punkt_tab')
 
     cwd = os.getcwd()
 

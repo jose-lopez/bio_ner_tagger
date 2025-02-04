@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="thinc-spacy" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="thinc-spacy" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (biopatternsg)" project-jdk-type="Python SDK" />
 </project>
